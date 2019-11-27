@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Catamaran:800&display=swap');
+
+*{
+  margin:0;
+}
+@media screen and (max-width: 320px) {
+  /* comes into effect for screens less than or equal to 320 pixels */
+  #somethingorother {
+    width: 120px ;
+  }
+}
+@media screen and (min-width: 321px) and (max-width: 480px) {
+  /* comes into effect for screens between 321 and 480 pixels (inclusive) */
+  #somethingorother {
+    width: 320px ;
+  }
+}
+@media screen and (min-width: 481px) {
+  /* comes into effect for screens larger than or equal to 481 pixels */
+  #somethingorother {
+    width: 480px ;
+  }
+}
+
+body {
+  display: grid;
+  font-family: "Lato", sans-serif;
+  width: 100%;
+  height: 200px;
+  grid-template: 
+  [header-left] "header header" 60px [header-right]
+                 [main-left]   "sidebar  mainbar" 1fr  [main-right]
+                 [main-left] "sidebar  mainbar" 30px [main-right]/ 14% 86%;
+}
+
+h1{
+  padding: 0px 0 15px 0;
+}
+
+.header {
+  color:#fff;
+  background-color: #000;
+  grid-area: header;
+  padding:15px 0 10px 6%;
+  font-size: 11px;
+}
+
+.sidebar {
+  background-color: #e9e9e9;
+  grid-area: sidebar;
+  height: 100vh;
+}
+
+.mainbar {
+  background-color: #fff;
+  grid-area: mainbar;
+  height: 100vh;
+}
+
+textarea{
+  height: 200px;
+}
+
+input[type=text], [type=password],[type=email], select, textarea{
+  width: 50%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: block;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-sizing: border-box;
+  background-color: rgb(240, 240, 240);
+}
+
+
+input[type=submit] {
+  width: 13%;
+  background-color: rgb(13, 134, 204);
+  color: white;
+  padding: 14px 20px;
+  margin: 20px 0;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+label{
+  font-weight: 900;
+  font-size: 18px;  
+}
+.formdiv {
+  border-radius: 5px;
+  padding: 5px;
+  margin: 0 25px;
+}
+.formdiv h1{
+  font-size: 35px;
+  font-family: 'Catamaran', sans-serif;
+  font-weight: bolder;
+}
+
+ul{
+  text-decoration: none;
+  list-style: none;
+  margin: 0;
+  padding: 0;  
+}
+
+li{
+  padding: 15px;
+  font-weight: bolder;
+}
+
+a:link, a:visited, a:hover, a:active{
+  text-decoration: none;
+  color: #000000;
+}
+
+.material-icons{
+  font-size: 24px;
+}
+
+
+
+
+
+
+
+/* body,html{
+  height: 100vh;
+} */
+
+
+/* div{
+width: 100%;
+height: 100%;
+min-width: 1000px;
+min-height: 1000px;
+} */
