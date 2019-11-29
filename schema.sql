@@ -45,15 +45,24 @@ CREATE TABLE `issues` (
 );
 
 ALTER TABLE `issues` ADD CONSTRAINT `issues_fk0` FOREIGN KEY (`assigned_to`) REFERENCES `users`(`id`);
-ALTER TABLE `issues` ADD CONSTRAINT `issues_fk1` FOREIGN KEY (`created_by`) REFERENCES `users`(`id`);
+ ALTER TABLE `issues` ADD CONSTRAINT `issues_fk1` FOREIGN KEY (`created_by`) REFERENCES `users`(`id`);
 
 /*SELECT * FROM `users`
  WHERE `email` = '<the email address entered by the user>'
    AND `password` = ;*/
 
-
+/*  assigned to USER-ISSUES Query
+*CREATE PROCEDURE*
+SELECT * FROM `issues` FROM
+INNER JOIN users ON users.id=issues.id WHERE user.id="USERID";*/
 
 DELIMITER //
+/*  1 -Administrator 2-Regular*/
+CREATE PROCEDURE `getRole`(IN `id` INT, OUT `role` INT)
+BEGIN
+	SELECT roleid FROM userroles WHERE userroles.id = id;
+END //
+
 
 CREATE PROCEDURE `add_User`(IN `firstname` VARCHAR(45),IN `lastname` VARCHAR(45),IN `email` VARCHAR(45),IN `p_Passw` VARCHAR(200))
 BEGIN
@@ -61,8 +70,41 @@ BEGIN
 	VALUES (`firstname`,`lastname`,`email`,MD5(`p_Passw`),CURDATE());
 END //
 
+
+CREATE PROCEDURE `createIssue`(IN `title` varchar(255),
+	IN `description` TEXT,
+	IN `type` enum('bug','proposal','task'),
+	IN `priority` enum('minor','major','critical'),
+	IN `status` enum('open','closed','inprogress') ,
+	IN `assigned_to` INT,
+	IN `created_by` INT)
+	BEGIN
+	INSERT into issues(title,description,type,priority,status,assigned_to,created_by)
+	VALUES (title,`description`,`type`,priority,`status`,assigned_to,created_by);
+	END//
+
+/*
+
+CREATE PROCEDURE `updateIssue`(IN `issueID` INT,IN `title` varchar(255),
+	IN `description` TEXT,
+	IN `type` enum('bug','proposal','task'),
+	IN `priority` enum('minor','major','critical'),
+	IN `status` enum('open','closed','inprogress') ,
+	IN `assigned_to` INT,
+	IN `created_by` INT,
+	`created` DATETIME NOT NULL,
+	`updated` DATETIME,)
+BEGIN
+	UPDATE issues SET `updated` = CURDATE(), field2 = new-value2
+	WHERE issues.id = issueID
+
+END // */
+
 DELIMITER ;
 
+
+/*Adding admin user*/
 CALL add_User('Phil','Rich','admin@bugme.com','password123');
+/*Making user Admin*/
 INSERT into userroles(userid,roleid)
 VALUES(1,1);
