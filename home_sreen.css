@@ -1,0 +1,90 @@
+body{
+    font-family: Verdana ;
+}
+.wrapper{
+    display: grid;
+    grid-template-columns: 0.5fr 3fr;
+    grid-template-rows: 60px 1000px;
+}
+
+.header{
+    grid-row: 1;
+    grid-column: span 2;
+    background-color: black;
+    color: white;
+    padding: 0.01px 50px;
+}
+.sidebar{
+    padding: 20px;
+    grid-column: 1;
+    background-color: rgba(219, 213, 213, 0.452)
+    
+}
+
+.body{
+    padding: 20px;
+    grid-column: 2;
+    
+}
+
+img{
+    position: relative;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+    bottom: 0px;
+}
+#pow{
+      padding-right:5px;
+}
+
+.issue_inline{
+    padding: 20px;
+    margin-left:80px ;
+}
+h1{
+    display: inline;
+}
+p{
+    display: inline;
+    font-weight: bold;
+    padding-right: 20px;
+}
+#b_a{
+    float: right;
+    margin-right: 50px;
+    border: 0px;
+    width: 150px;
+    height: 30px;
+    border-radius: 4px;
+    background-color: rgb(15, 180, 9);
+    color: white;
+    cursor: pointer;
+}
+#b_b{
+    border: 0px;
+    width: 80px;
+    height: 25px;
+    border-radius: 4px;
+    background-color: rgb(9, 40, 180);
+    color: white;
+}
+#b_b2{
+    border: 0px;
+    width: 80px;
+    height: 25px;
+    border-radius: 4px;
+    background-color:white;
+    color: black;
+}
+table{
+    border-spacing: 0px;
+    margin-left: 100px; 
+}
+th{
+    background-color: rgb(245, 243, 243);
+    padding: 10px 100px 10px 10px;
+}
+#bug{
+    filter: invert(100%);
+    padding-right: 20px;
+}
