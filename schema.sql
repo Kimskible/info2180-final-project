@@ -23,9 +23,9 @@ INSERT into roles(role_name)
 VALUES('admin'),('reg');
 
 CREATE TABLE `userroles` (
-	`userid` INT NOT NULL,
+	`userid` INT NOT NULL UNIQUE,
 	`roleid` INT NOT NULL DEFAULT 2,
-	FOREIGN KEY (`userid`) REFERENCES `users`(`id`),
+	FOREIGN KEY (`userid`) REFERENCES `users`(`id`) ON DELETE CASCADE,
 	FOREIGN KEY (`roleid`) REFERENCES `roles`(`roleid`)
 	
 );
@@ -46,23 +46,97 @@ CREATE TABLE `issues` (
 
 ALTER TABLE `issues` ADD CONSTRAINT `issues_fk0` FOREIGN KEY (`assigned_to`) REFERENCES `users`(`id`);
 ALTER TABLE `issues` ADD CONSTRAINT `issues_fk1` FOREIGN KEY (`created_by`) REFERENCES `users`(`id`);
+ 
+ 
+ 
+DELIMITER // 
+
+CREATE PROCEDURE `login`(IN `email` varchar(255), IN `password` char(32))
+BEGIN
+	SELECT * 
+	FROM users 
+	INNER JOIN userroles ON users.id=userroles.userid 
+	WHERE users.email = email and users.password=password;
+END //
+
 
 /*SELECT * FROM `users`
  WHERE `email` = '<the email address entered by the user>'
    AND `password` = ;*/
 
+/*  assigned to USER-ISSUES Query
+*CREATE PROCEDURE*
+SELECT * FROM `issues` FROM
+INNER JOIN users ON users.id=issues.id WHERE user.id="USERID";*/
 
 
-DELIMITER //
+/*  1 -Administrator 2-Regular*/
 
 CREATE PROCEDURE `add_User`(IN `firstname` VARCHAR(45),IN `lastname` VARCHAR(45),IN `email` VARCHAR(45),IN `p_Passw` VARCHAR(200))
 BEGIN
 	INSERT into users(`firstname`,lastname,email,`password`,date_joined) 
 	VALUES (`firstname`,`lastname`,`email`,MD5(`p_Passw`),CURDATE());
+	INSERT INTO userroles(userid) VALUES (LAST_INSERT_ID());
+
+	
 END //
+
+CREATE PROCEDURE `add_adminUser`(IN `firstname` VARCHAR(45),IN `lastname` VARCHAR(45),IN `email` VARCHAR(45),IN `p_Passw` VARCHAR(200))
+BEGIN
+	INSERT into users(`firstname`,lastname,email,`password`,date_joined) 
+	VALUES (`firstname`,`lastname`,`email`,MD5(`p_Passw`),CURDATE());
+	INSERT INTO userroles(userid,roleid) VALUES (LAST_INSERT_ID(),1);
+
+	
+END //
+
+/*
+
+CREATE PROCEDURE `getIssuesAssgnTo`(IN `userid` INT)
+BEGIN
+	SELECT * FROM `issues`
+	INNER JOIN users ON users.id=issues.id ;
+END //
+
+*/
+
+CREATE PROCEDURE `createIssue`(IN `title` varchar(255),
+	IN `description` TEXT,
+	IN `type` enum('bug','proposal','task'),
+	IN `priority` enum('minor','major','critical'),
+	IN `status` enum('open','closed','inprogress') ,
+	IN `assigned_to` INT,
+	IN `created_by` INT)
+	BEGIN
+	INSERT into issues(title,description,type,priority,status,assigned_to,created_by,created)
+	VALUES (title,`description`,`type`,priority,`status`,assigned_to,created_by,NOW());
+	END //
+
+
+
+CREATE PROCEDURE `updateIssue`(IN `issueID` INT,IN `title` varchar(255),
+	IN `description` TEXT,
+	IN `type` enum('bug','proposal','task'),
+	IN `priority` enum('minor','major','critical'),
+	IN `status` enum('open','closed','inprogress') ,
+	IN `assigned_to` INT,
+	IN `created_by` INT,
+	`created` DATETIME,
+	`updated` DATETIME)
+BEGIN
+	UPDATE issues SET issues.updated = CURDATE(), issues.description = issues.description,
+	type=type,priority = priority
+	WHERE issues.id = issueID
+
+END // 
 
 DELIMITER ;
 
-CALL add_User('Phil','Rich','admin@bugme.com','password123');
-INSERT into userroles(userid,roleid)
-VALUES(1,1);
+
+/*Adding admin user*/
+CALL add_adminUser('Phil','Rich','admin@bugme.com','password123');
+/*Making user Admin*/
+
+/*
+call login("smithcleon@gmail.com",MD5("brogad"))
+call add_User("Cleon","Mullings","smithcleon@gmail.com","brogad");*/
