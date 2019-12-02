@@ -7,10 +7,7 @@ require_once('./util/db.php');
  if($_SERVER["REQUEST_METHOD"] == "POST")
  {
 
-   $email 	= $_POST['email'];
-  //$email 	= $_POST["user_email"];
-  //$email ="admin@bugme.com";
-  //$password = md5("password123");
+   $email 	= $_POST["email"];
    $password = md5($_POST["psw"]);
   
   $query  = "SELECT * FROM users WHERE email='$email' AND password='$password'";
@@ -20,13 +17,13 @@ require_once('./util/db.php');
 
   if( $num_row >=1 ) {
 
-    echo "ok"; // log in
+    header("location:./home.html"); // log in
 
     $_SESSION['logged_in'] = $row['id'];
 
   }else {
 
-    echo "error";
+    echo "Login Failed";
   
   }
     
