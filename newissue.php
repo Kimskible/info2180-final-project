@@ -9,7 +9,12 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <title>BugMe Issue Tracker</title>
 </head>
+  <?php
+      $connect = new PDO('mysql:host=localhost;dbname=bugme;', 'root', '');
 
+      $stmt = $connect->query("SELECT * FROM users");
+      $results = $stmt ->fetchALL(PDO ::FETCH_ASSOC);
+  ?>
 <body>
 
   <div class="header">
@@ -24,19 +29,14 @@
       <li><a href="login.html"> Logout</a></li>
     </ul>
   </div>
-  <?php
-      $connect = new PDO('mysql:host=localhost;dbname=bugme;', 'root', '');
 
-      $stmt = $connect->query("SELECT * FROM users");
-      $results = $stmt ->fetchALL(PDO ::FETCH_ASSOC);
-  ?>
 
   <div class="mainbar">
     <div class="formdiv">
 
       <h1> Create Issue </h1>
 
-      <form action = "home.html">
+      <form method="post" action = "issue.php" >
         <label for="title">Title</label>
         <input type="text" id="title" name="title">
         
