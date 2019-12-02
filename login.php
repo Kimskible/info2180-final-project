@@ -17,9 +17,16 @@ if(isset($_SESSION['logged_in']))
   $num_row = mysqli_num_rows($result);
   $row     = mysqli_fetch_array($result);
   if( $num_row >=1 ) {
+<<<<<<< HEAD
   $_SESSION['logged_in'] = $row['id'];
   $_SESSION['role'] = 2;
     header("location: home.html"); // log in
+=======
+	$_SESSION['logged_in'] = $row['id'];
+	$_SESSION['role'] = 2;
+    header("location: home.html"); // log in
+
+>>>>>>> 814fdf0182c7106c5cb4c089cbc7b5c439b651b7
     
   }else {
     echo "Login Failed";

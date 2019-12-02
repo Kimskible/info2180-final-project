@@ -1,5 +1,10 @@
+*{
+    margin: 0;
+}
+
 body{
-    font-family: Verdana ;
+    font-family: Arial, Helvetica, sans-serif;
+    width:100%;
 }
 .wrapper{
     display: grid;
@@ -25,7 +30,7 @@ header{
 .body{
     padding: 20px;
     grid-column: 2;
-    
+    /* height: 100vh;     */
 }
 
 img{
@@ -138,4 +143,26 @@ h4{
 }
 .buttons p:nth-child(even){
     margin-top: 0px;
+}
+
+
+
+
+@media screen and (max-width: 320px) {
+  /* comes into effect for screens less than or equal to 320 pixels */
+  #somethingorother {
+    width: 120px ;
+  }
+}
+@media screen and (min-width: 321px) and (max-width: 480px) {
+  /* comes into effect for screens between 321 and 480 pixels (inclusive) */
+  #somethingorother {
+    width: 320px ;
+  }
+}
+@media screen and (min-width: 481px) {
+  /* comes into effect for screens larger than or equal to 481 pixels */
+  #somethingorother {
+    width: 480px ;
+  }
 }
