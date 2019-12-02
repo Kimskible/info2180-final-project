@@ -7,7 +7,7 @@ require_once('./util/db.php');
 
 if(isset($_SESSION['logged_in']))
 {
-    header("Location: home.php");
+    header("Location: home.html");
     exit;
  }
 
@@ -25,7 +25,7 @@ if(isset($_SESSION['logged_in']))
   if( $num_row >=1 ) {
 	$_SESSION['logged_in'] = $row['id'];
 	$_SESSION['role'] = 2;
-    header("location: createUser.php"); // log in
+    header("location: home.html"); // log in
 
     
 
