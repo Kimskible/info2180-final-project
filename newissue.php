@@ -36,7 +36,7 @@
 
       <h1> Create Issue </h1>
 
-      <form action = "home.html">
+      <form method="post" action = "issue.php" >
         <label for="title">Title</label>
         <input type="text" id="title" name="title">
         
