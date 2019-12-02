@@ -7,8 +7,8 @@
 */
 //membuat deklarasi variable
 $hostname = "localhost";
-$username = "bugmeapp";
-$password = "password";
+$username = "root";
+$password = "";
 $database = "bugme";
 //create variable connectin
 $connection = mysqli_connect($hostname, $username, $password, $database);
