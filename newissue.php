@@ -10,7 +10,7 @@
   <title>BugMe Issue Tracker</title>
 </head>
   <?php
-      $connect = new PDO('mysql:host=localhost;dbname=bugme;', 'root', '');
+      $connect = new PDO('mysql:host=localhost;dbname=bugme;', 'bugmeapp', 'password');
 
       $stmt = $connect->query("SELECT * FROM users");
       $results = $stmt ->fetchALL(PDO ::FETCH_ASSOC);
