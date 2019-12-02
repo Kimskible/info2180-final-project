@@ -24,6 +24,12 @@
       <li><a href="login.html"> Logout</a></li>
     </ul>
   </div>
+  <?php
+      $connect = new PDO('mysql:host=localhost;dbname=bugme;', 'root', '');
+
+      $stmt = $connect->query("SELECT * FROM users");
+      $results = $stmt ->fetchALL(PDO ::FETCH_ASSOC);
+  ?>
 
   <div class="mainbar">
     <div class="formdiv">
@@ -39,9 +45,9 @@
 
         <label for="assignedto"> Assigned To </label>
         <select id="assigned" name="assigned">
-          <option value="1"> user one </option>
-          <option value="2"> user two </option>
-          <option value="3"> user three </option>
+          <?php foreach ($results as $row): ?>
+            <option><?=$row['firstname'].$row['lastname']?></option>
+          <?php endforeach; ?>
         </select>
 
         <label for="typeofissue"> Type </label>
