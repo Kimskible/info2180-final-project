@@ -23,10 +23,10 @@
 
   <div class="sidebar">
     <ul class="">
-      <li><a href="home.html"> Home</a></li>
-      <li><a href="createuser.html"> Add User</a></li>
-      <li><a href="newissue.html"> New Issue</a></li>
-      <li><a href="login.html"> Logout</a></li>
+      <li><a class ="home-page" href="home.html"> Home</a></li>
+      <li><a class ="add-u-page" href="createuser.html"> Add User</a></li>
+      <li><a class ="new-issue-page" href="newissue.php"> New Issue</a></li>
+      <li><a class ="logout-page" href="logout.php"> Logout</a></li>
     </ul>
   </div>
 
