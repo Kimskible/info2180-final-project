@@ -12,11 +12,12 @@
     if(ctype_alnum ($title) && ctype_alnum ($description) && ctype_alnum ($assignedTo) && ctype_alnum ($typeOf)  && ctype_alnum ($priority){
         $connect = new PDO('mysql:host=localhost;dbname=bugme;', 'root', '');
 
-        $stmt = $connect->query("SELECT id FROM users");
+        $stmt = $connect->query("SELECT * FROM users");
         $results = $stmt ->fetchALL(PDO ::FETCH_ASSOC);
         foreach ($results as $row) {
-            if($assignedTo == $row){
-                $assignedToID = $row;
+            if($assignedTo == $row['id']){
+                $assignedToID = $row['id'];
+
             }
         }
 
