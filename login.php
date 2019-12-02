@@ -1,42 +1,39 @@
 <?php
 ob_start();
 session_start();
-
 require_once('./util/db.php');
-
-
 if(isset($_SESSION['logged_in']))
 {
-    header("Location: home.php");
+    header("Location: home.html");
     exit;
  }
-
  if($_SERVER["REQUEST_METHOD"] == "POST")
  {
-
-   $email 	= $_POST["email"];
+   $email   = $_POST["email"];
    $password = md5($_POST["psw"]);
   
   $query  = "SELECT * FROM users WHERE email='$email' AND password='$password'";
   $result = mysqli_query($connection,$query)or die(mysqli_error());
   $num_row = mysqli_num_rows($result);
   $row     = mysqli_fetch_array($result);
-
   if( $num_row >=1 ) {
+<<<<<<< HEAD
+  $_SESSION['logged_in'] = $row['id'];
+  $_SESSION['role'] = 2;
+    header("location: home.html"); // log in
+=======
 	$_SESSION['logged_in'] = $row['id'];
 	$_SESSION['role'] = 2;
-    header("location: createUser.php"); // log in
+    header("location: home.html"); // log in
 
+>>>>>>> 814fdf0182c7106c5cb4c089cbc7b5c439b651b7
     
-
   }else {
-
     echo "Login Failed";
   
   }
     
  }
-
 ?>
 
 <!DOCTYPE html>
@@ -80,5 +77,4 @@ if(isset($_SESSION['logged_in']))
 </body>
 
 </html>
-
 

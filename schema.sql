@@ -1,5 +1,6 @@
 DROP DATABASE IF EXISTS bugme;
 CREATE DATABASE bugme;
+GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, INDEX, ALTER ON bugme.* TO 'bugmeapp'@'localhost' IDENTIFIED BY 'password';
 USE bugme;
 
 /*Currently hashing in database it might be better to do it in PHP*/
