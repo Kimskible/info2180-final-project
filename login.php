@@ -4,7 +4,7 @@ session_start();
 require_once('./util/db.php');
 if(isset($_SESSION['logged_in']))
 {
-    header("Location: home.html");
+    header("Location: home.php");
     exit;
  }
  if($_SERVER["REQUEST_METHOD"] == "POST")
@@ -19,7 +19,7 @@ if(isset($_SESSION['logged_in']))
   if( $num_row >=1 ) {
   $_SESSION['logged_in'] = $row['id'];
   $_SESSION['role'] = 2;
-    header("location: home.html"); // log in
+    header("location: home.php"); // log in
     
   }else {
     echo "Login Failed";

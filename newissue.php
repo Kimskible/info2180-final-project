@@ -24,7 +24,7 @@
 
   <div class="sidebar">
     <ul class="">
-      <li><a class ="home-page" href="home.html"> Home</a></li>
+      <li><a class ="home-page" href="home.php"> Home</a></li>
       <li><a class ="add-u-page" href="createuser.html"> Add User</a></li>
       <li><a class ="new-issue-page" href="newissue.php"> New Issue</a></li>
       <li><a class ="logout-page" href="logout.php"> Logout</a></li>
@@ -47,22 +47,22 @@
         <label for="assignedto"> Assigned To </label>
         <select id="assigned" name="assigned">
           <?php foreach ($results as $row): ?>
-            <option><?=$row['firstname'].$row['lastname']?></option>
+            <option><?=$row['firstname']." ".$row['lastname']?></option>
           <?php endforeach; ?>
         </select>
 
         <label for="typeofissue"> Type </label>
         <select id="typeof" name="typeof">
-          <option value="1"> Bug </option>
-          <option value="2">  </option>
-          <option value="3">  </option>
+          <option value="bug"> Bug </option>
+          <option value="proposal"> Proposal </option>
+          <option value="task"> Task </option>
         </select>
 
         <label for="priority"> Priority </label>
         <select id="pri" name="pri">
-          <option value="1"> Minor </option>
-          <option value="2"> Major </option>
-          <option value="3"> Critical </option>
+          <option value="minor"> Minor </option>
+          <option value="major"> Major </option>
+          <option value="critical"> Critical </option>
         </select>
 
         <input type="submit" value="Submit">

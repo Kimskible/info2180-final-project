@@ -1,6 +1,15 @@
+<?php
+
+  $issueId = $_GET["id"];
+  $connect = new PDO('mysql:host=localhost;dbname=bugme;', 'bugmeapp', 'password');
+  $stmt = $connect->query("SELECT * FROM issues WHERE id = $issueId");
+  $results = $stmt ->fetchALL(PDO ::FETCH_ASSOC);
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
-<!--echo "<a href='displayIss.php"."?id=".$row['id']."'>".$row['title']."</a>";-->
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,17 +39,12 @@
     </ul>
   </div>
 
-
   <div class="mainbar">
-    <div class="dashtable">
-      <h1> Issues </h1>
-
-      <table>
-
-
-      </table>
-
-      
+        <h1><?=$results[0]['title']?></h1>
+        <h4>Issue #<?=$results[0]["id"]?></h4><br>
+        <p><?=$results[0]["description"]?></p><br>
+        <p>Issue created on <?=$results[0]["created"]?> by <?= $results[0]["created_by"]?></p>
+        <p>Last updated on <?=$results[0]["updated"]?></p>
     </div>
   </div>
 

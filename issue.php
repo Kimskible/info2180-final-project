@@ -5,31 +5,34 @@
     $assignedTo = $_POST['assigned'];
     $typeOf = $_POST['typeof'];
     $priority = $_POST['pri'];
-    $assignedToID = "1";
+    $assignedToID;
     $time = $_SERVER['REQUEST_TIME'];
     $success = 0;
-    $def = "Open";
-    
-    $_SESSION['session_ID'] = session_id();
-    $my_Id = $_SESSION['session_ID'];
+    $def = 'open';
 
-
-    if(ctype_alnum ($title) && ctype_alnum ($description) && ctype_alnum ($assignedTo) && ctype_alnum ($typeOf)  && ctype_alnum ($priority)){
+    $my_Id =$_SESSION['logged_in'];
+    if(ctype_alnum ($title) && ctype_alnum ($description) && ctype_alnum ($typeOf)  && ctype_alnum ($priority)){
         $connect = new PDO('mysql:host=localhost;dbname=bugme;', 'bugmeapp', 'password');
 
         $stmt = $connect->query("SELECT * FROM users");
         $results = $stmt ->fetchALL(PDO ::FETCH_ASSOC);
         foreach ($results as $row){
-            if($assignedTo == ($row['firstname'].$row['lastname'])){
+            if($assignedTo == ($row['firstname']." ".$row['lastname'])){
                 $assignedToID = $row['id'];
             }
         }
-
-        $connect2 = new PDO('mysql:host=localhost;dbname=bugme;', 'bugmeapp', 'password');
+        $connect = null;
+        $stmt = null;
+        $results = null;
+        $connect = new PDO('mysql:host=localhost;dbname=bugme;', 'bugmeapp', 'password');
         $insertData = "INSERT INTO issues(title,description,type,priority,status,assigned_to,created_by,created,updated)
-        VALUES ('$title','$description','$typeOf','$priority','$def','$assignedToID','$my_Id','$time','$time')";
-
-        $stmt = $connect2->query($insertData);
+        VALUES ('$title','$description','$typeOf','$priority','$def','$assignedToID','$my_Id',$time,$time)";
+        $stmt = $connect->query($insertData);
+        ?>
+        <p><?=$title, $description, $typeOf, $priority, $def, $assignedToID, $my_Id, $time, $time?></p>
+        <?php
+        $stmt = $connect->query("SELECT * FROM issues");
+        $results = $stmt ->fetchALL(PDO ::FETCH_ASSOC);
         $success = 1;
     }
 
@@ -42,4 +45,4 @@
 ?>
 
 
-    <p><a href="home.html"> Click here to go home.</a></p>
+    <p><a href="home.php"> Click here to go home.</a></p>

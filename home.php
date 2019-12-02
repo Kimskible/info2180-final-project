@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<!--echo "<a href='displayIss.php"."?id=".$row['id']."'>".$row['title']."</a>";-->
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -34,11 +33,20 @@
   <div class="mainbar">
     <div class="dashtable">
       <h1> Issues </h1>
+      <br>
+      <?php
 
-      <table>
 
-
-      </table>
+        $connect = new PDO('mysql:host=localhost;dbname=bugme;', 'bugmeapp', 'password');
+        $stmt = $connect->query("SELECT * FROM issues");
+        $results = $stmt ->fetchALL(PDO ::FETCH_ASSOC);
+      ?>
+      <ul>
+          <?php foreach ($results as $row){
+            echo "<li><a href='displayIss.php"."?id=".$row['id']."'>".$row['title']."</li></a>";
+          }
+          ?>
+      </ul>  
 
       
     </div>
