@@ -139,5 +139,3 @@ CALL add_adminUser('Phil','Rich','admin@bugme.com','password123');
 /*Making user Admin*/
 
 /*
-call login("smithcleon@gmail.com",MD5("brogad"))
-call add_User("Cleon","Mullings","smithcleon@gmail.com","brogad");*/
